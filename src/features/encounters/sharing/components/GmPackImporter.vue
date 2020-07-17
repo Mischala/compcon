@@ -18,10 +18,10 @@
 
 <script lang ="ts">
 import { Vue, Component, Watch} from 'vue-property-decorator'
+import { getModule } from 'vuex-module-decorators'
 import { importData } from '@/io/Data'
 import { GmPack } from '@/class'
-import { IGmPackData } from '@/classes/Interfaces'
-import { getModule } from 'vuex-module-decorators'
+import { IGmPackData } from '@/interface'
 import { NpcStore, EncounterStore, MissionStore } from '@/store'
 
 @Component({})
@@ -35,7 +35,7 @@ export default class GmPackImporter extends Vue {
     this.gmPack = GmPack.Deserialize(fileData);
   }
 
-  private import(): void {
+  private importGmPack(): void {
     const npcStore = getModule(NpcStore, this.$store)
     const encounterStore = getModule(EncounterStore, this.$store)
     const missionStore = getModule(MissionStore, this.$store)
