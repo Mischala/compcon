@@ -18,10 +18,9 @@ import MissionRunner from './mission/runner/Active.vue'
 import MissionDebriefing from './mission/runner/Debriefing.vue'
 
 import GmPackBuilder from './sharing/components/GmPackBuilder.vue'
+import GmPackImporter from './sharing/components/GmPackImporter.vue'
 
 import { RouteConfig } from 'vue-router'
-import { getModule } from 'vuex-module-decorators'
-import { NpcStore, EncounterStore, MissionStore } from '@/store'
 
 const routes: RouteConfig[] = [
   {
@@ -55,6 +54,14 @@ const routes: RouteConfig[] = [
             props: true,
           },
         ],
+      },
+      {
+        path: '/gm/pack-builder',
+        component: GmPackBuilder
+      },
+      {
+        path: '/gm/pack-importer',
+        component: GmPackImporter
       },
       {
         path: '/gm/mission',
@@ -103,10 +110,6 @@ const routes: RouteConfig[] = [
           },
         ],
       },
-      {
-        path: '/gm/pack-builder',
-        component: GmPackBuilder
-      }
     ],
   },
 ]

@@ -1,5 +1,5 @@
-import { Npc, Encounter, Mission } from '@/class';
-import { IGmPackData } from './Interfaces';
+import { Npc, Encounter, Mission } from '@/class'
+import { IGmPackData } from './Interfaces'
 
 export class GmPack {
   private _name: string
@@ -16,10 +16,36 @@ export class GmPack {
     this._npcs = npcs
   }
 
+  public static Deserialize(gmPackData: IGmPackData): GmPack {
+    const missions = gmPackData.missions.map(mission => Mission.Deserialize(mission))
+    const encounters = gmPackData.encounters.map(encounter => Encounter.Deserialize(encounter))
+    const npcs = gmPackData.npcs.map(npc => Npc.Deserialize(npc))
+
+    return new GmPack(
+      gmPackData.name,
+      gmPackData.description,
+      missions,
+      encounters,
+      npcs
+    )
+  }
+
+  public get npcs(): Npc[] {
+    return this._npcs
+  }
+
+  public get encounters(): Encounter[] {
+    return this._encounters
+  }
+
+  public get missions(): Mission[] {
+    return this._missions
+  }
+
   public static Serialize(gmPack: GmPack): IGmPackData {
-    const missionData = gmPack._missions.map((mission) => Mission.Serialize(mission))
-    const encounterData = gmPack._encounters.map((encounter) => Encounter.Serialize(encounter))
-    const npcData = gmPack._npcs.map((npc) => Npc.Serialize(npc))
+    const missionData = gmPack.missions.map((mission) => Mission.Serialize(mission))
+    const encounterData = gmPack.encounters.map((encounter) => Encounter.Serialize(encounter))
+    const npcData = gmPack.npcs.map((npc) => Npc.Serialize(npc))
 
     return {
       name: gmPack._name,

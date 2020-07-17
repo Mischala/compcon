@@ -45,7 +45,7 @@
           title="GM Pack Importer"
           icon="mdi-book-open-variant"
           text="Import Missions, Encounters and NPCs that other GMs have made."
-          to="/gm/pack-builder"
+          to="/gm/pack-importer"
         />
       </v-col>
 

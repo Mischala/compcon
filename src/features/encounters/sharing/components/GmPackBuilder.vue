@@ -100,9 +100,9 @@
 
 <script lang="ts">
 import { Vue, Watch, Component } from 'vue-property-decorator'
+import { getModule } from 'vuex-module-decorators'
 import _ from 'lodash'
 import { Npc, Mission, Encounter, GmPack } from '@/class'
-import { getModule } from 'vuex-module-decorators'
 import { NpcStore, EncounterStore, MissionStore } from '@/store'
 import { saveFile } from '@/io/Dialog'
 
@@ -139,11 +139,11 @@ export default class GmPackBuilder extends Vue {
 
   @Watch('selectedMissions', { deep: true })
   private onSelectedMissionsChange (newVal, oldVal): void {
-    // if lengh of new is bigger than old, we have a new missiom, and must lock it's children
+    // if length of new is bigger than old, we have a new missiom, and must lock it's children
     if (newVal.length > oldVal.length) {
       const addedvalues = newVal.filter(val => !oldVal.includes(val))
       addedvalues.map(this.lockMissionChildren)
-      // if lengh of new is smaller than old, we have removed missiom, and must unlock it's children
+      // if length of new is smaller than old, we have removed missiom, and must unlock it's children
     } else if (newVal.length < oldVal.length) {
       const removedvalues = oldVal.filter(val => !newVal.includes(val));
       removedvalues.map(this.unlockEncounterChildren)
